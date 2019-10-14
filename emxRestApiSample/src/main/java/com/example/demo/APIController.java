@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.util.AppUtil;
 
 
 @RestController
@@ -20,12 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class APIController {
 	private final Logger logger = LoggerFactory.getLogger(APIController.class);
 	
-	@RequestMapping(value="resume", method=RequestMethod.GET)
-	public String foo(HttpServletRequest req) {
+	@GetMapping(value="/")
+	public String emptyRequest(HttpServletRequest req) {
+		return "OK";
+	}
+	@GetMapping(value="resume/response")
+	public String resumeResponse(HttpServletRequest req) {
 		List<String> parameters = req.getParameterMap().keySet().stream()
 				.map(i -> i + "=" + (req.getParameterMap().get(i))[0]).collect(Collectors.toList());
-		String error = "No Result Found for the search request: " + parameters;
-		System.out.println("The Error is:"+error);
-	    return "OK";
+		String parameter = "The Request Parameters are: " + parameters;
+		logger.debug(parameter);
+		String response = req.getParameter("q") == null ? "OK":AppUtil.getResponseText(req.getParameter("q"));
+	    return response;
 	}
 }
