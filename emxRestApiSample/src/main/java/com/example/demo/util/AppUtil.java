@@ -9,8 +9,9 @@ public class AppUtil {
 	
 	public static String getResponseText(String request) {
 		LinkedHashMap<String, String> resumeResponse = new LinkedHashMap<>();
+		String puzzleResponse = " ABCD \nA=<<< \nB>=>< \nC><=< \nD>>>=";
 				resumeResponse.put("Ping" , "OK");
-				resumeResponse.put("Puzzle" , "d=Please solve this puzzle");
+				resumeResponse.put("Puzzle" , puzzleResponse);
 				resumeResponse.put("Position" , "Software Engineer with Fullstack, Backend, Data or Frontend experience - ID# 2018-2462");
 				resumeResponse.put("Source" , "https://github.com/pranavsaid/EMX_API_PranavsaiDeenumsetti.git");
 				resumeResponse.put("Name" , "Pranav sai Deenumsetti");
